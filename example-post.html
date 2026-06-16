@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample entry, Hirav Kadikar</title>
+<meta name="description" content="Replace with a one line summary of this post.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0C;
+  --text: #F3F2EE;
+  --muted: #8A8A93;
+  --muted2: #5C5C66;
+  --line: #232329;
+  --gold: #C9A24B;
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --maxw: 1160px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--font-body);
+  font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,12,0.85); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-row { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2rem; max-width: var(--maxw); margin: 0 auto; }
+.logo { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 1.2rem; text-decoration: none; }
+.logo .dot { color: var(--gold); font-style: normal; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 0.82rem; color: var(--muted); }
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-cta {
+  font-size: 0.8rem; padding: 0.55rem 1.2rem; border: 1px solid var(--gold);
+  color: var(--gold); border-radius: 30px; text-decoration: none; transition: background 0.2s, color 0.2s;
+}
+.nav-cta:hover { background: var(--gold); color: #0A0A0C; }
+
+article { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 6rem; }
+.post-back { font-size: 0.85rem; color: var(--muted); text-decoration: none; display: inline-block; margin-bottom: 2.2rem; }
+.post-back:hover { color: var(--gold); }
+.post-meta {
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.2rem;
+}
+.post-h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.1rem, 4.8vw, 3rem); letter-spacing: -0.02em; line-height: 1.12; margin-bottom: 2.4rem;
+}
+.post-body p { font-size: 1.04rem; line-height: 1.9; color: var(--text); margin-bottom: 1.5rem; }
+.post-body h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 2.4rem 0 1rem; }
+.post-body strong { font-weight: 600; color: var(--gold); }
+.post-body a { color: var(--gold); text-decoration: underline; }
+
+footer { border-top: 1px solid var(--line); padding: 1.8rem 0; }
+.footer-row { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted2); max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+.footer-row span.gold { color: var(--gold); }
+
+@media (max-width: 860px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <a href="../index.html" class="logo">Hirav<span class="dot">.</span>K</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#ventures">Ventures</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../blog.html" class="active">Journal</a></li>
+    </ul>
+    <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="nav-cta">Connect</a>
+  </div>
+</header>
+
+<article>
+  <a href="../blog.html" class="post-back">← Journal</a>
+  <div class="post-meta">Jun 2026 · Operations</div>
+  <h1 class="post-h1">Sample entry, replace this title</h1>
+  <div class="post-body">
+    <p>Replace this paragraph with your opening line. Keep paragraphs short. This template is built for plain prose, no special formatting needed beyond what is here.</p>
+    <h2>A subheading, if you need one</h2>
+    <p>Use <strong>bold</strong> for emphasis sparingly. Use <a href="https://hirav.me">links</a> when pointing elsewhere. Delete this template content and write the real post.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-row">
+    <span>© 2026 Hirav Kadikar. All rights reserved.</span>
+    <span><span class="gold">hirav</span>.me</span>
+  </div>
+</footer>
+
+</body>
+</html>

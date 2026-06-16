@@ -1,1304 +1,585 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="dc5305ef-b730-41ca-a13b-4957987af09a"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hirav K — Systems Thinker. Builder. Operator.</title>
+<title>Hirav Kadikar</title>
+<meta name="description" content="Hirav Kadikar. Co-founder, 6Pistons Media. Head of Sales, Business and Operations at Spazorlabs. Builder of systems, products, and ventures.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #050508;
-    --surface: #0c0c14;
-    --surface2: #12121e;
-    --border: rgba(255,255,255,0.06);
-    --accent: #e8ff47;
-    --accent2: #47b8ff;
-    --accent3: #ff6b47;
-    --text: #f0f0f8;
-    --muted: #6b6b80;
-    --font-head: 'Syne', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
+:root {
+  --bg: #0A0A0C;
+  --surface: #121216;
+  --surface2: #18181E;
+  --line: #232329;
+  --text: #F3F2EE;
+  --muted: #8A8A93;
+  --muted2: #5C5C66;
+  --gold: #C9A24B;
+  --gold-soft: rgba(201,162,75,0.12);
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --maxw: 1160px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAV */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,12,0.7);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 2rem; max-width: var(--maxw); margin: 0 auto;
+}
+.logo {
+  font-family: var(--font-display); font-style: italic; font-weight: 600;
+  font-size: 1.2rem; text-decoration: none; letter-spacing: -0.01em;
+}
+.logo .dot { color: var(--gold); font-style: normal; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; font-size: 0.82rem; color: var(--muted);
+  letter-spacing: 0.02em; transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px;
+  background: var(--gold); transition: width 0.25s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem; padding: 0.55rem 1.2rem;
+  border: 1px solid var(--gold); color: var(--gold);
+  border-radius: 30px; text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-cta:hover { background: var(--gold); color: #0A0A0C; }
+body { padding-top: 0; }
 
-  html { scroll-behavior: smooth; }
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+#hero-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 0; opacity: 0.55;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--gold);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.6rem;
+  opacity: 0; animation: riseIn 0.7s 0.15s forwards;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.hero-eyebrow .pulse {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+  box-shadow: 0 0 0 0 rgba(201,162,75,0.6);
+  animation: pulseDot 2s infinite;
+}
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(201,162,75,0.55); }
+  70% { box-shadow: 0 0 0 8px rgba(201,162,75,0); }
+  100% { box-shadow: 0 0 0 0 rgba(201,162,75,0); }
+}
+.hero-name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(3rem, 8vw, 6.4rem); line-height: 0.98;
+  letter-spacing: -0.02em; margin-bottom: 1.8rem;
+  opacity: 0; animation: riseIn 0.8s 0.3s forwards;
+}
+.hero-name .italic { font-style: italic; font-weight: 500; color: var(--gold); }
+.hero-desc {
+  font-size: 1.12rem; color: var(--muted); max-width: 580px; line-height: 1.75;
+  margin-bottom: 2.4rem;
+  opacity: 0; animation: riseIn 0.8s 0.45s forwards;
+}
+.hero-desc strong { color: var(--text); font-weight: 600; }
+.role-strip {
+  display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 2.8rem;
+  opacity: 0; animation: riseIn 0.8s 0.6s forwards;
+}
+.role-chip {
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted);
+  padding: 0.5rem 1rem; border: 1px solid var(--line); border-radius: 30px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.role-chip:hover { border-color: var(--gold); color: var(--gold); }
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: riseIn 0.8s 0.75s forwards;
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.scroll-cue {
+  position: absolute; bottom: 2.4rem; left: 2rem; z-index: 1;
+  display: flex; align-items: center; gap: 0.8rem;
+  opacity: 0; animation: riseIn 0.8s 1s forwards;
+}
+.scroll-cue-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--gold), transparent); position: relative; overflow: hidden; }
+.scroll-cue-line::after {
+  content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+  background: var(--text); animation: scrollDrip 2.2s infinite;
+}
+@keyframes scrollDrip { 0% { top: -100%; } 100% { top: 100%; } }
+.scroll-cue-text { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted2); letter-spacing: 0.1em; text-transform: uppercase; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-mono);
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 1.6rem; font-size: 0.88rem; text-decoration: none;
+  border-radius: 30px; transition: transform 0.2s, opacity 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+  font-weight: 500;
+}
+.btn-primary { background: var(--gold); color: #0A0A0C; }
+.btn-primary:hover { transform: translateY(-2px); opacity: 0.92; }
+.btn-secondary { border: 1px solid var(--line); color: var(--text); }
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 12px; height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, width 0.2s, height 0.2s, opacity 0.2s;
-    mix-blend-mode: difference;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 40px; height: 40px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.15s ease-out, width 0.3s, height 0.3s, opacity 0.2s;
-    opacity: 0.5;
-  }
+/* FOCUS TICKER */
+#focus {
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 1.1rem 0; overflow: hidden; position: relative; z-index: 1;
+  background: var(--surface);
+}
+.ticker-track { display: flex; gap: 3rem; width: max-content; animation: tick 26s linear infinite; }
+.ticker-item {
+  font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); white-space: nowrap;
+  display: flex; align-items: center; gap: 0.9rem;
+}
+.ticker-item .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+@keyframes tick { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-  /* Canvas bg */
-  #bg-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
+/* SECTION SHARED */
+section.block { padding: 6rem 0; position: relative; z-index: 1; }
+.section-eyebrow {
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem); letter-spacing: -0.015em;
+  margin-bottom: 3rem; max-width: 22ch;
+}
+.section-title .italic { font-style: italic; color: var(--gold); font-weight: 500; }
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-    background: rgba(5,5,8,0.7);
-    backdrop-filter: blur(20px);
-  }
-  .nav-logo {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 1.3rem;
-    letter-spacing: -0.03em;
-    color: var(--text);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--accent); }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-cta {
-    padding: 0.6rem 1.4rem;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-  }
-  .nav-cta:hover { background: var(--accent); color: var(--bg); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* SECTIONS */
-  section { position: relative; z-index: 1; }
+/* ABOUT */
+#about { border-top: 1px solid var(--line); }
+.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4.5rem; }
+.about-body p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 1.3rem; }
+.about-body strong { color: var(--text); font-weight: 600; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.stat-cell { background: var(--surface); padding: 1.8rem; transition: background 0.25s; }
+.stat-cell:hover { background: var(--surface2); }
+.stat-num {
+  font-family: var(--font-display); font-size: 2.4rem; font-weight: 700;
+  color: var(--gold); line-height: 1;
+}
+.stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
 
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 4rem;
-    position: relative;
-  }
-  .hero-tag {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.3s forwards;
-  }
-  .hero-name {
-    font-family: var(--font-head);
-    font-size: clamp(4rem, 10vw, 9rem);
-    font-weight: 800;
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.5s forwards;
-  }
-  .hero-name .line2 {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.25);
-  }
-  .hero-desc {
-    max-width: 520px;
-    color: var(--muted);
-    font-size: 0.85rem;
-    line-height: 1.8;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.7s forwards;
-  }
-  .hero-badges {
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.85s forwards;
-  }
-  .badge {
-    padding: 0.4rem 1rem;
-    border: 1px solid var(--border);
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    text-transform: uppercase;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .badge:hover { border-color: var(--accent); color: var(--accent); }
-  .badge.active { border-color: var(--accent); color: var(--accent); }
-  .hero-scroll {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 1s forwards;
-  }
-  .scroll-line {
-    width: 60px;
-    height: 1px;
-    background: var(--muted);
-    position: relative;
-    overflow: hidden;
-  }
-  .scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--accent);
-    animation: scrollLine 2s 1.5s infinite;
-  }
-  @keyframes scrollLine {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
-  .scroll-text { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
-  .hero-counter {
-    position: absolute;
-    right: 3rem;
-    bottom: 4rem;
-    text-align: right;
-    opacity: 0;
-    animation: fadeIn 1s 1.2s forwards;
-  }
-  .counter-num {
-    font-family: var(--font-head);
-    font-size: 5rem;
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.1);
-    line-height: 1;
-  }
-  .counter-label { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+/* VENTURES */
+#ventures { border-top: 1px solid var(--line); }
+.ventures-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.venture-card {
+  border: 1px solid var(--line); border-radius: 14px; padding: 2.2rem;
+  background: var(--surface);
+  transition: border-color 0.25s, transform 0.25s, background 0.25s;
+  position: relative; overflow: hidden;
+}
+.venture-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+}
+.venture-card:hover { border-color: rgba(201,162,75,0.4); transform: translateY(-4px); background: var(--surface2); }
+.venture-card:hover::before { transform: scaleX(1); }
+.venture-role {
+  font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--gold); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.venture-role::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.venture-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; margin-bottom: 0.9rem; }
+.venture-desc { color: var(--muted); font-size: 0.94rem; line-height: 1.8; margin-bottom: 1.5rem; }
+.venture-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.68rem;
+  color: var(--gold); background: var(--gold-soft); padding: 0.3rem 0.7rem;
+  border-radius: 20px; margin-bottom: 1.2rem;
+}
+.venture-link {
+  display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.86rem;
+  text-decoration: none; color: var(--text); border-bottom: 1px solid var(--muted2);
+  padding-bottom: 3px; transition: color 0.2s, border-color 0.2s;
+}
+.venture-link:hover { color: var(--gold); border-color: var(--gold); }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+/* PROJECTS */
+#projects { border-top: 1px solid var(--line); }
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.project-card {
+  border: 1px solid var(--line); border-radius: 14px; padding: 2rem;
+  background: var(--surface); transition: border-color 0.25s, transform 0.25s, background 0.25s;
+}
+.project-card:hover { border-color: rgba(201,162,75,0.35); transform: translateY(-4px); background: var(--surface2); }
+.project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; }
+.project-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+.patent-tag {
+  font-family: var(--font-mono); font-size: 0.64rem; color: var(--gold);
+  background: var(--gold-soft); padding: 0.25rem 0.6rem; border-radius: 20px;
+  white-space: nowrap; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.2rem; }
+.project-tags { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.66rem; padding: 0.25rem 0.6rem;
+  border: 1px solid var(--line); border-radius: 20px; color: var(--muted);
+}
 
-  /* MARQUEE */
-  .marquee-wrap {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 0;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-  }
-  .marquee-track {
-    display: flex;
-    gap: 3rem;
-    animation: marquee 20s linear infinite;
-    width: max-content;
-  }
-  .marquee-item {
-    font-family: var(--font-head);
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .marquee-item .dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+/* INTERESTS */
+#interests { border-top: 1px solid var(--line); }
+.interests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.interest-card {
+  border: 1px solid var(--line); border-radius: 14px; padding: 2rem;
+  background: var(--surface); transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  position: relative; overflow: hidden;
+}
+.interest-card:hover { border-color: rgba(201,162,75,0.35); transform: translateY(-3px); background: var(--surface2); }
+.interest-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.6rem; }
+.interest-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.75; }
 
-  /* ABOUT */
-  #about {
-    padding: 7rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-  .about-left { position: relative; }
-  .about-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-  }
-  .about-headline {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: 2rem;
-  }
-  .about-headline em { font-style: normal; color: var(--accent); }
-  .about-body {
-    color: var(--muted);
-    font-size: 0.82rem;
-    line-height: 2;
-    margin-bottom: 2rem;
-  }
-  .about-right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  .stat-block {
-    background: var(--surface);
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-  }
-  .stat-block:hover { background: var(--surface2); }
-  .stat-num {
-    font-family: var(--font-head);
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-  }
-  .stat-label { font-size: 0.65rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
-  .stat-block::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-  }
-  .stat-block:hover::after { transform: scaleX(1); }
+/* JOURNAL TEASER */
+#journal-teaser { border-top: 1px solid var(--line); }
+.jt-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.jt-text { max-width: 540px; }
+.jt-text p { color: var(--muted); font-size: 0.96rem; line-height: 1.8; margin-top: 1rem; }
 
-  /* VENTURES */
-  #ventures {
-    padding: 7rem 3rem;
-    border-top: 1px solid var(--border);
-  }
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 4rem;
-  }
-  .section-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-  }
-  .section-num {
-    font-family: var(--font-head);
-    font-size: 5rem;
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.07);
-    line-height: 1;
-  }
-  .ventures-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  .venture-card {
-    background: var(--surface);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-    cursor: pointer;
-  }
-  .venture-card:hover { background: var(--surface2); }
-  .venture-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: linear-gradient(90deg, var(--accent), transparent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s;
-  }
-  .venture-card:hover::before { transform: scaleX(1); }
-  .venture-role {
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .venture-role::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-  .venture-name {
-    font-family: var(--font-head);
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.8rem;
-    transition: color 0.2s;
-  }
-  .venture-card:hover .venture-name { color: var(--accent); }
-  .venture-desc {
-    color: var(--muted);
-    font-size: 0.78rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-  }
-  .venture-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .venture-link:hover { color: var(--accent); }
-  .venture-link svg { transition: transform 0.2s; }
-  .venture-link:hover svg { transform: translate(3px, -3px); }
+/* CONTACT */
+#contact { border-top: 1px solid var(--line); padding-bottom: 6rem; }
+.contact-grid { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem; }
+.contact-links { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+.contact-link {
+  font-size: 0.9rem; text-decoration: none; color: var(--muted);
+  border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+}
+.contact-link:hover { color: var(--gold); border-color: var(--gold); }
 
-  /* PROJECTS */
-  #projects {
-    padding: 7rem 3rem;
-    border-top: 1px solid var(--border);
-  }
-  .projects-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  .project-row {
-    background: var(--surface);
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    align-items: center;
-    gap: 2rem;
-    padding: 1.8rem 2rem;
-    transition: background 0.2s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-row::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(232,255,71,0.03), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .project-row:hover { background: var(--surface2); }
-  .project-row:hover::after { opacity: 1; }
-  .project-num {
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    min-width: 2rem;
-  }
-  .project-info { }
-  .project-name {
-    font-family: var(--font-head);
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    transition: color 0.2s;
-  }
-  .project-row:hover .project-name { color: var(--accent); }
-  .project-desc {
-    font-size: 0.73rem;
-    color: var(--muted);
-  }
-  .project-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-  .tag {
-    padding: 0.25rem 0.7rem;
-    border: 1px solid var(--border);
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    text-transform: uppercase;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .project-row:hover .tag { border-color: rgba(232,255,71,0.3); color: var(--accent); }
-  .project-arrow {
-    color: var(--muted);
-    transition: color 0.2s, transform 0.2s;
-  }
-  .project-row:hover .project-arrow { color: var(--accent); transform: translate(4px, -4px); }
+footer { border-top: 1px solid var(--line); padding: 1.8rem 0; position: relative; z-index: 1; }
+.footer-row { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted2); max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+.footer-row span.gold { color: var(--gold); }
 
-  /* INTERESTS */
-  #interests {
-    padding: 7rem 3rem;
-    border-top: 1px solid var(--border);
-  }
-  .interests-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin-top: 4rem;
-  }
-  .interest-card {
-    background: var(--surface);
-    padding: 3rem 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-  }
-  .interest-card:hover { background: var(--surface2); }
-  .interest-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    display: block;
-    filter: grayscale(0.3);
-    transition: transform 0.3s, filter 0.3s;
-  }
-  .interest-card:hover .interest-icon { transform: scale(1.1) rotate(-5deg); filter: grayscale(0); }
-  .interest-name {
-    font-family: var(--font-head);
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.02em;
-  }
-  .interest-desc {
-    color: var(--muted);
-    font-size: 0.75rem;
-    line-height: 1.8;
-  }
-  .interest-card::after {
-    content: '';
-    position: absolute;
-    bottom: -2rem; right: -2rem;
-    width: 8rem; height: 8rem;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    transition: transform 0.4s;
-  }
-  .interest-card:hover::after { transform: scale(1.3); border-color: rgba(232,255,71,0.15); }
-
-  /* VISION */
-  #vision {
-    padding: 8rem 3rem;
-    border-top: 1px solid var(--border);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .vision-bg-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: var(--font-head);
-    font-size: clamp(8rem, 20vw, 18rem);
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.03);
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .vision-content { position: relative; z-index: 1; }
-  .vision-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-  }
-  .vision-headline {
-    font-family: var(--font-head);
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    margin-bottom: 2rem;
-  }
-  .vision-sub {
-    color: var(--muted);
-    font-size: 0.85rem;
-    max-width: 480px;
-    margin: 0 auto 3rem;
-    line-height: 1.9;
-  }
-
-  /* CONTACT */
-  #contact {
-    padding: 5rem 3rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-  .contact-left {}
-  .contact-greeting {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  .contact-name {
-    font-family: var(--font-head);
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-  .contact-links {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .contact-link:hover { color: var(--accent); }
-  .footer-bottom {
-    padding: 1.5rem 3rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-copy { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
-  .footer-domain { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
-  .footer-domain span { color: var(--accent); }
-
-  /* CTA BUTTON */
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1rem 2rem;
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1rem 2rem;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: border-color 0.2s, color 0.2s, transform 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Glitch effect */
-  .glitch {
-    position: relative;
-  }
-  .glitch::before,
-  .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .glitch::before {
-    color: var(--accent2);
-    animation: glitch1 3s infinite;
-    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
-    opacity: 0;
-  }
-  .glitch::after {
-    color: var(--accent3);
-    animation: glitch2 3s infinite;
-    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
-    opacity: 0;
-  }
-  @keyframes glitch1 {
-    0%, 90%, 100% { opacity: 0; transform: none; }
-    92% { opacity: 0.8; transform: translate(-3px, 1px); }
-    94% { opacity: 0.8; transform: translate(3px, -1px); }
-    96% { opacity: 0; }
-  }
-  @keyframes glitch2 {
-    0%, 91%, 100% { opacity: 0; transform: none; }
-    93% { opacity: 0.8; transform: translate(3px, 2px); }
-    95% { opacity: 0.8; transform: translate(-3px, -2px); }
-    97% { opacity: 0; }
-  }
-
-  /* Terminal blink */
-  .blink {
-    animation: blink 1.2s step-end infinite;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    #about { grid-template-columns: 1fr; gap: 3rem; }
-    .ventures-grid { grid-template-columns: 1fr; }
-    .interests-grid { grid-template-columns: 1fr; }
-    #hero { padding: 6rem 1.5rem 3rem; }
-    #about, #ventures, #projects, #interests, #vision { padding: 5rem 1.5rem; }
-    #contact { padding: 3rem 1.5rem; }
-    .footer-bottom { padding: 1rem 1.5rem; }
-    .hero-counter { display: none; }
-    .project-row { grid-template-columns: auto 1fr; }
-    .project-tags, .project-arrow { display: none; }
-  }
-
-  /* Line clamp */
-  .domain-tag {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    background: rgba(232,255,71,0.08);
-    border: 1px solid rgba(232,255,71,0.2);
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    margin-top: 0.5rem;
-  }
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .ventures-grid, .projects-grid { grid-template-columns: 1fr; }
+  .interests-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+@media (max-width: 560px) {
+  .interests-grid { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .wrap, .nav-row, .footer-row { padding-left: 1.3rem; padding-right: 1.3rem; }
+  .scroll-cue { display: none; }
+}
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<header>
+  <div class="nav-row">
+    <a href="#hero" class="logo">Hirav<span class="dot">.</span>K</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#ventures">Ventures</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="blog.html">Journal</a></li>
+    </ul>
+    <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="nav-cta">Connect</a>
+  </div>
+</header>
 
-<canvas id="bg-canvas"></canvas>
-
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">H<span>.</span>K</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#ventures">Ventures</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#interests">Interests</a></li>
-    <li><a href="#vision">Vision</a></li>
-  </ul>
-  <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="nav-cta">Connect →</a>
-</nav>
-
-<!-- HERO -->
 <section id="hero">
-  <div class="hero-tag">// Business Head · Co-founder · Builder</div>
-  <h1 class="hero-name glitch" data-text="HIRAV">
-    HIRAV<br>
-    <span class="line2">KIRIT.</span>
-  </h1>
-  <p class="hero-desc">
-    Systems thinker. Operations obsessive. Building companies at the intersection of tech, commerce, and emerging markets — from EV platforms to blockchain infrastructure.
-  </p>
-  <div class="hero-badges">
-    <span class="badge active">Spazorlabs</span>
-    <span class="badge">6Pistons</span>
-    <span class="badge">IoT</span>
-    <span class="badge">Blockchain</span>
-    <span class="badge">Finance</span>
-    <span class="badge">Cars & Aviation</span>
+  <canvas id="hero-canvas"></canvas>
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow"><span class="pulse"></span>Co-founder, 6Pistons Media · Head of Sales, Business & Operations, Spazorlabs</div>
+    <h1 class="hero-name">Hirav<br><span class="italic">Kadikar.</span></h1>
+    <p class="hero-desc">
+      I run the commercial and operational engine behind growing companies, and build products on the side when a problem is worth solving. <strong>Operations, sales, and systems</strong> are the throughline.
+    </p>
+    <div class="role-strip">
+      <span class="role-chip">Spazorlabs</span>
+      <span class="role-chip">6Pistons Media</span>
+      <span class="role-chip">Strive Consultancy</span>
+      <span class="role-chip">Blockchain</span>
+      <span class="role-chip">RF Security</span>
+      <span class="role-chip">Aviation</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#ventures" class="btn btn-primary">View ventures</a>
+      <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="btn btn-secondary">LinkedIn ↗</a>
+    </div>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span class="scroll-text">Scroll to explore</span>
-  </div>
-  <div class="hero-counter">
-    <div class="counter-num">06</div>
-    <div class="counter-label">Projects launched</div>
+  <div class="scroll-cue">
+    <div class="scroll-cue-line"></div>
+    <span class="scroll-cue-text">Scroll</span>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item"><span class="dot"></span> Business Head @ Spazorlabs</span>
-    <span class="marquee-item"><span class="dot"></span> Co-founder @ 6Pistons</span>
-    <span class="marquee-item"><span class="dot"></span> IoT Systems Builder</span>
-    <span class="marquee-item"><span class="dot"></span> Blockchain Carbon Credits</span>
-    <span class="marquee-item"><span class="dot"></span> Three.js eCommerce</span>
-    <span class="marquee-item"><span class="dot"></span> AI & ML Engineer</span>
-    <span class="marquee-item"><span class="dot"></span> Cars · Aviation · Finance</span>
-    <span class="marquee-item"><span class="dot"></span> Ops & Systems Maniac</span>
-    <span class="marquee-item"><span class="dot"></span> Business Head @ Spazorlabs</span>
-    <span class="marquee-item"><span class="dot"></span> Co-founder @ 6Pistons</span>
-    <span class="marquee-item"><span class="dot"></span> IoT Systems Builder</span>
-    <span class="marquee-item"><span class="dot"></span> Blockchain Carbon Credits</span>
-    <span class="marquee-item"><span class="dot"></span> Three.js eCommerce</span>
-    <span class="marquee-item"><span class="dot"></span> AI & ML Engineer</span>
-    <span class="marquee-item"><span class="dot"></span> Cars · Aviation · Finance</span>
-    <span class="marquee-item"><span class="dot"></span> Ops & Systems Maniac</span>
+<div id="focus">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item"><span class="dot"></span>Head of Sales, Business & Ops, Spazorlabs</span>
+    <span class="ticker-item"><span class="dot"></span>Co-founder, 6Pistons Media</span>
+    <span class="ticker-item"><span class="dot"></span>DevOps Consultant, Strive Consultancy</span>
+    <span class="ticker-item"><span class="dot"></span>Blockchain Carbon Credit System, patent pending</span>
+    <span class="ticker-item"><span class="dot"></span>MREM Radio Exposure Mapper, patent pending</span>
+    <span class="ticker-item"><span class="dot"></span>Aviation · Automobiles · Personal Finance</span>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-left reveal">
-    <div class="about-label">// 01 — Who I Am</div>
-    <h2 class="about-headline">I build <em>systems</em> that scale ideas into operations.</h2>
-    <p class="about-body">
-      I live at the intersection of tech and business operations — designing platforms, processes, and products that don't just work in theory, but hold up under real-world load. From B2B EV infrastructure to AI-driven diagnostics, I've shipped things that matter.
-    </p>
-    <p class="about-body">
-      Currently running business strategy at <strong style="color:var(--text)">Spazorlabs.com</strong> and co-building the automotive-enthusiast platform <strong style="color:var(--text)">6Pistons.com</strong>. Always chasing the next asymmetric opportunity.
-    </p>
-    <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
-      <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="btn-primary">LinkedIn ↗</a>
-      <a href="https://hirav.me" target="_blank" class="btn-outline">hirav.me ↗</a>
-    </div>
-  </div>
-  <div class="about-right reveal">
-    <div class="stat-block">
-      <div class="stat-num">6+</div>
-      <div class="stat-label">Projects Shipped</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num">2</div>
-      <div class="stat-label">Companies</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Domains of Mastery</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num">∞</div>
-      <div class="stat-label">Ambition Level</div>
+<section id="about" class="block">
+  <div class="wrap">
+    <div class="section-eyebrow">About</div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>I work at the intersection of business operations and product. On the operating side, that means sales strategy, process design, and the project management that turns a plan into a shipped outcome. On the product side, it means picking problems I find genuinely interesting and building until they work.</p>
+        <p>I head sales, business, and operations at <strong>Spazorlabs</strong>, and act as project manager on its larger initiatives. I co-founded <strong>6Pistons Media</strong>, which started as a passion project helping car dealerships market themselves and now runs as a revenue business. I also consult on DevOps for <strong>Strive Consultancy</strong>.</p>
+        <p>Outside client work, I build things for fun: a blockchain-based carbon credit system, and a multi-radio exposure mapper for wireless security, both with patents in process.</p>
+      </div>
+      <div class="stat-grid reveal">
+        <div class="stat-cell">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Companies / Engagements</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Patents in process</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Projects shipped</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Curiosity</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- VENTURES -->
-<section id="ventures">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-label">// 02 — Ventures</div>
-      <h2 class="section-title">Companies I<br>Operate & Build</h2>
-    </div>
-    <div class="section-num">02</div>
-  </div>
-  <div class="ventures-grid reveal">
-    <div class="venture-card">
-      <div class="venture-role">Business Head</div>
-      <div class="venture-name">Spazorlabs</div>
-      <p class="venture-desc">
-        Leading business strategy, operations, and growth at Spazorlabs. Driving cross-functional execution across product, sales, and partnerships in an emerging tech environment. This is where systems thinking meets execution speed.
-      </p>
-      <div class="domain-tag">spazorlabs.com</div>
-      <br><br>
-      <a href="https://spazorlabs.com" target="_blank" class="venture-link">
-        Visit Company
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="currentColor" stroke-width="1.5"/></svg>
-      </a>
-    </div>
-    <div class="venture-card">
-      <div class="venture-role">Co-founder</div>
-      <div class="venture-name">6Pistons</div>
-      <p class="venture-desc">
-        Co-founded an automotive platform for car enthusiasts, gearheads, and EV adopters. Building community, content, and commerce around the culture of driving. A passion project that became a real venture.
-      </p>
-      <div class="domain-tag">6pistons.com</div>
-      <br><br>
-      <a href="https://6pistons.com" target="_blank" class="venture-link">
-        Visit Company
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="currentColor" stroke-width="1.5"/></svg>
-      </a>
+<section id="ventures" class="block">
+  <div class="wrap">
+    <div class="section-eyebrow">Ventures</div>
+    <h2 class="section-title">Where I spend <span class="italic">working hours.</span></h2>
+    <div class="ventures-grid">
+      <div class="venture-card reveal">
+        <div class="venture-role">Head, Sales · Business · Operations</div>
+        <div class="venture-name">Spazorlabs</div>
+        <p class="venture-desc">Leading sales, business strategy, and operations. Acting as project manager on the company's large-scale initiatives, owning execution from plan to delivery.</p>
+        <a href="https://spazorlabs.com" target="_blank" class="venture-link">spazorlabs.com ↗</a>
+      </div>
+      <div class="venture-card reveal">
+        <div class="venture-role">Co-founder</div>
+        <div class="venture-name">6Pistons Media</div>
+        <p class="venture-desc">Helping car dealerships market themselves, build brand presence, and reach buyers. Started as a passion project around automotive culture, now operating as a revenue-generating business.</p>
+        <a href="https://6pistons.com" target="_blank" class="venture-link">6pistons.com ↗</a>
+      </div>
+      <div class="venture-card reveal">
+        <div class="venture-role">Builder, then Product Development Manager</div>
+        <div class="venture-name">Advengeo</div>
+        <p class="venture-desc">Built the original website for this 3D eCommerce marketplace, then moved into the product development manager role, owning the roadmap as it grew.</p>
+        <span class="venture-badge">3D · WebGL · eCommerce</span>
+      </div>
+      <div class="venture-card reveal">
+        <div class="venture-role">DevOps Consultant</div>
+        <div class="venture-name">Strive Consultancy</div>
+        <p class="venture-desc">Advising on DevOps practice, infrastructure, and delivery pipelines for a Mumbai-based business transformation firm.</p>
+        <span class="venture-badge">Consulting</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-label">// 03 — Projects</div>
-      <h2 class="section-title">Things I've<br>Actually Built</h2>
-    </div>
-    <div class="section-num">03</div>
-  </div>
-  <div class="projects-list reveal">
-
-    <div class="project-row">
-      <div class="project-num">01</div>
-      <div class="project-info">
-        <div class="project-name">IoT Fire Detection System</div>
-        <div class="project-desc">Real-time fire and smoke detection using embedded IoT sensors, edge computing, and alert infrastructure. Designed for industrial and residential deployment.</div>
+<section id="projects" class="block">
+  <div class="wrap">
+    <div class="section-eyebrow">Projects for fun</div>
+    <h2 class="section-title">Built because the problem was <span class="italic">worth solving.</span></h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-name">Blockchain Carbon Credit System</div>
+          <span class="patent-tag">Patent in process</span>
+        </div>
+        <p class="project-desc">A decentralized platform for issuing, verifying, and trading carbon credits on-chain, built to bring transparency and traceability to ESG compliance and voluntary carbon markets.</p>
+        <div class="project-tags"><span class="tag">Blockchain</span><span class="tag">Web3</span><span class="tag">ESG</span></div>
       </div>
-      <div class="project-tags">
-        <span class="tag">IoT</span>
-        <span class="tag">Embedded</span>
-        <span class="tag">Edge</span>
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-name">MREM, Multi Radio Exposure Mapper</div>
+          <span class="patent-tag">Patent in process</span>
+        </div>
+        <p class="project-desc">A scanning tool that reads Wi-Fi, Bluetooth, BLE, radio, and five other wireless protocols across an environment, then generates a vulnerability report on exposure and risk.</p>
+        <div class="project-tags"><span class="tag">RF Security</span><span class="tag">Wireless</span><span class="tag">Vulnerability Mapping</span></div>
       </div>
-      <div class="project-arrow">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 14L14 2M14 2H7M14 2V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      </div>
-    </div>
-
-    <div class="project-row">
-      <div class="project-num">02</div>
-      <div class="project-info">
-        <div class="project-name">Advengeo.com — 3D eCommerce Marketplace</div>
-        <div class="project-desc">Live product marketplace with full Three.js 3D product visualization. Users explore and interact with products in real-time 3D before purchase — a next-gen shopping experience.</div>
-      </div>
-      <div class="project-tags">
-        <span class="tag">Three.js</span>
-        <span class="tag">eCommerce</span>
-        <span class="tag">3D / WebGL</span>
-      </div>
-      <div class="project-arrow">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 14L14 2M14 2H7M14 2V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      </div>
-    </div>
-
-    <div class="project-row">
-      <div class="project-num">03</div>
-      <div class="project-info">
-        <div class="project-name">Cancer Detection System</div>
-        <div class="project-desc">Machine learning-powered diagnostic tool for early-stage cancer pattern detection from medical imaging. Built with deep learning models trained on medical datasets.</div>
-      </div>
-      <div class="project-tags">
-        <span class="tag">ML / AI</span>
-        <span class="tag">Healthcare</span>
-        <span class="tag">Computer Vision</span>
-      </div>
-      <div class="project-arrow">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 14L14 2M14 2H7M14 2V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      </div>
-    </div>
-
-    <div class="project-row">
-      <div class="project-num">04</div>
-      <div class="project-info">
-        <div class="project-name">Blockchain Carbon Credit System</div>
-        <div class="project-desc">Decentralized platform for issuing, verifying, and trading carbon credits on-chain. Bringing transparency and traceability to ESG compliance and voluntary carbon markets.</div>
-      </div>
-      <div class="project-tags">
-        <span class="tag">Blockchain</span>
-        <span class="tag">Web3</span>
-        <span class="tag">ESG / Carbon</span>
-      </div>
-      <div class="project-arrow">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 14L14 2M14 2H7M14 2V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      </div>
-    </div>
-
-    <div class="project-row">
-      <div class="project-num">05</div>
-      <div class="project-info">
-        <div class="project-name">Operations & Systems Infrastructure</div>
-        <div class="project-desc">Designed and deployed internal ops systems — SOPs, automation workflows, and business intelligence dashboards — for startup-stage companies to scale without chaos.</div>
-      </div>
-      <div class="project-tags">
-        <span class="tag">Ops</span>
-        <span class="tag">Automation</span>
-        <span class="tag">BI</span>
-      </div>
-      <div class="project-arrow">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 14L14 2M14 2H7M14 2V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      </div>
-    </div>
-
-    <div class="project-row">
-      <div class="project-num">06</div>
-      <div class="project-info">
-        <div class="project-name">6Pistons — Automotive Community Platform</div>
-        <div class="project-desc">End-to-end platform build: community forums, editorial content, marketplace listings, and event discovery for automotive culture enthusiasts across India.</div>
-      </div>
-      <div class="project-tags">
-        <span class="tag">Platform</span>
-        <span class="tag">Community</span>
-        <span class="tag">Automotive</span>
-      </div>
-      <div class="project-arrow">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 14L14 2M14 2H7M14 2V9" stroke="currentColor" stroke-width="1.5"/></svg>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- INTERESTS -->
-<section id="interests">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-label">// 04 — Interests</div>
-      <h2 class="section-title">What Drives<br>My Thinking</h2>
-    </div>
-    <div class="section-num">04</div>
-  </div>
-  <div class="interests-grid reveal">
-    <div class="interest-card">
-      <span class="interest-icon">🚗</span>
-      <div class="interest-name">Cars & Automotive</div>
-      <p class="interest-desc">From ICE to EV — engineering, performance, culture. Cars are systems, and I'm obsessed with how they work at every layer. Co-founded 6Pistons to build around this passion.</p>
-    </div>
-    <div class="interest-card">
-      <span class="interest-icon">✈️</span>
-      <div class="interest-name">Aviation</div>
-      <p class="interest-desc">The intersection of precision engineering, logistics, and ambition. Aviation is the ultimate systems problem — millions of coordinated decisions to move people across the sky.</p>
-    </div>
-    <div class="interest-card">
-      <span class="interest-icon">📈</span>
-      <div class="interest-name">Finance & Wealth</div>
-      <p class="interest-desc">Obsessed with capital allocation, market dynamics, and the mechanics of wealth creation. Finance is the meta-layer of all business — understanding it is the ultimate leverage.</p>
-    </div>
-    <div class="interest-card">
-      <span class="interest-icon">⚙️</span>
-      <div class="interest-name">Systems & Operations</div>
-      <p class="interest-desc">Great systems are invisible when they work. I design processes, SOPs, and infrastructure that allow businesses to scale without breaking. This is my superpower.</p>
-    </div>
-    <div class="interest-card">
-      <span class="interest-icon">🔗</span>
-      <div class="interest-name">Blockchain & Web3</div>
-      <p class="interest-desc">Decentralized infrastructure as the next evolution of trust and coordination. Already shipped a blockchain carbon credit system — watching where else this reshapes industries.</p>
-    </div>
-    <div class="interest-card">
-      <span class="interest-icon">🤖</span>
-      <div class="interest-name">AI & Emerging Tech</div>
-      <p class="interest-desc">Applied ML from cancer detection to smart sensors. AI is a toolbox — I care about using it to solve real problems, not just talking about it.</p>
     </div>
   </div>
 </section>
 
-<!-- VISION -->
-<section id="vision">
-  <div class="vision-bg-text">RICH</div>
-  <div class="vision-content reveal">
-    <div class="vision-label">// 05 — Vision</div>
-    <h2 class="vision-headline">
-      Building towards<br>
-      <span style="color:var(--accent)">financial freedom</span><br>
-      & massive impact.
-    </h2>
-    <p class="vision-sub">
-      The goal is simple and unashamed: build systems, companies, and wealth that compound over time. Create things that outlast the effort. Operate with precision. Scale without limits.
-    </p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-      <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="btn-primary">
-        Connect on LinkedIn ↗
-      </a>
-      <a href="mailto:workwith@hirav.me" class="btn-outline">
-        Say Hello →
-      </a>
+<section id="interests" class="block">
+  <div class="wrap">
+    <div class="section-eyebrow">Interests</div>
+    <h2 class="section-title">What I follow <span class="italic">closely.</span></h2>
+    <div class="interests-grid">
+      <div class="interest-card reveal">
+        <div class="interest-name">Aviation</div>
+        <p class="interest-desc">Precision engineering and logistics at scale, one of the cleanest examples of complex systems working under pressure.</p>
+      </div>
+      <div class="interest-card reveal">
+        <div class="interest-name">Automobiles</div>
+        <p class="interest-desc">From combustion to electric, the engineering and the culture. The reason 6Pistons exists.</p>
+      </div>
+      <div class="interest-card reveal">
+        <div class="interest-name">Personal Finance</div>
+        <p class="interest-desc">SIPs, the FIRE framework, family offices, and wealth management. The mechanics of building and preserving capital.</p>
+      </div>
+      <div class="interest-card reveal" style="grid-column: span 3;">
+        <div class="interest-name">Operations & Systems</div>
+        <p class="interest-desc">The processes and infrastructure that let a business scale without breaking. Quiet work, but the work that holds everything else up. This is the thread running through every role above.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<div id="contact">
-  <div class="contact-left">
-    <div class="contact-greeting">// Let's build something</div>
-    <div class="contact-name">Hirav K</div>
-    <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Business Head · Co-founder · Builder</div>
+<section id="journal-teaser" class="block">
+  <div class="wrap jt-row">
+    <div class="jt-text reveal">
+      <div class="section-eyebrow" style="margin-bottom:0.6rem;">Journal</div>
+      <h2 class="section-title" style="margin-bottom:0;">Notes from the work and outside it.</h2>
+      <p>Writing on operations, the businesses I'm building, and the things I follow when I'm not working, including cars, markets, and the occasional detour.</p>
+    </div>
+    <a href="blog.html" class="btn btn-secondary reveal">Read the journal ↗</a>
   </div>
-  <div class="contact-links">
-    <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="contact-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" fill="currentColor"/></svg>
-      LinkedIn
-    </a>
-    <a href="https://spazorlabs.com" target="_blank" class="contact-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-      Spazorlabs
-    </a>
-    <a href="https://6pistons.com" target="_blank" class="contact-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-      6Pistons
-    </a>
-    <a href="https://hirav.me" target="_blank" class="contact-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-      hirav.me
-    </a>
-  </div>
-</div>
+</section>
 
-<div class="footer-bottom">
-  <span class="footer-copy">© 2025 Hirav K. All rights reserved.</span>
-  <span class="footer-domain">Hosted at <span>hirav.me</span></span>
-</div>
+<section id="contact" class="block">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">Get in touch</div>
+      <h2 class="section-title" style="margin-bottom:0;">Let's build something.</h2>
+    </div>
+    <div class="contact-links reveal">
+      <a href="https://www.linkedin.com/in/hiravk" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://spazorlabs.com" target="_blank" class="contact-link">Spazorlabs</a>
+      <a href="https://6pistons.com" target="_blank" class="contact-link">6Pistons</a>
+      <a href="mailto:workwith@hirav.me" class="contact-link">Email</a>
+      <a href="blog.html" class="contact-link">Journal</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-row">
+    <span>© 2026 Hirav Kadikar. All rights reserved.</span>
+    <span><span class="gold">hirav</span>.me</span>
+  </div>
+</footer>
 
 <script>
-// ── Custom Cursor ──
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-});
-
-function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-document.querySelectorAll('a, button, .venture-card, .project-row, .interest-card, .badge, .stat-block').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.width = '20px';
-    cursor.style.height = '20px';
-    ring.style.width = '60px';
-    ring.style.height = '60px';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.width = '12px';
-    cursor.style.height = '12px';
-    ring.style.width = '40px';
-    ring.style.height = '40px';
-  });
-});
-
-// ── Three.js Background ──
-const canvas = document.getElementById('bg-canvas');
-const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.z = 30;
-
-// Particle field
-const count = 1800;
-const geo = new THREE.BufferGeometry();
-const positions = new Float32Array(count * 3);
-const colors = new Float32Array(count * 3);
-const sizes = new Float32Array(count);
-
-for (let i = 0; i < count; i++) {
-  positions[i*3] = (Math.random() - 0.5) * 80;
-  positions[i*3+1] = (Math.random() - 0.5) * 80;
-  positions[i*3+2] = (Math.random() - 0.5) * 60;
-  const t = Math.random();
-  if (t < 0.6) {
-    // accent yellow
-    colors[i*3] = 0.91; colors[i*3+1] = 1; colors[i*3+2] = 0.28;
-  } else if (t < 0.8) {
-    // blue
-    colors[i*3] = 0.28; colors[i*3+1] = 0.72; colors[i*3+2] = 1;
-  } else {
-    // dim white
-    colors[i*3] = 0.4; colors[i*3+1] = 0.4; colors[i*3+2] = 0.5;
-  }
-  sizes[i] = Math.random() * 2 + 0.5;
-}
-
-geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-const mat = new THREE.PointsMaterial({
-  size: 0.15,
-  vertexColors: true,
-  transparent: true,
-  opacity: 0.5,
-  sizeAttenuation: true,
-});
-const particles = new THREE.Points(geo, mat);
-scene.add(particles);
-
-// Wireframe sphere
-const sphereGeo = new THREE.IcosahedronGeometry(10, 2);
-const sphereMat = new THREE.MeshBasicMaterial({
-  color: 0xe8ff47,
-  wireframe: true,
-  transparent: true,
-  opacity: 0.04,
-});
-const sphere = new THREE.Mesh(sphereGeo, sphereMat);
-sphere.position.set(15, -5, -10);
-scene.add(sphere);
-
-// Second sphere
-const sphere2 = new THREE.Mesh(
-  new THREE.IcosahedronGeometry(6, 1),
-  new THREE.MeshBasicMaterial({ color: 0x47b8ff, wireframe: true, transparent: true, opacity: 0.05 })
-);
-sphere2.position.set(-18, 8, -15);
-scene.add(sphere2);
-
-// Grid plane
-const gridHelper = new THREE.GridHelper(80, 40, 0x1a1a2e, 0x0e0e1a);
-gridHelper.position.y = -25;
-scene.add(gridHelper);
-
-let mouseX = 0, mouseY = 0;
-document.addEventListener('mousemove', e => {
-  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-});
-
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-const clock = new THREE.Clock();
-function animate() {
-  requestAnimationFrame(animate);
-  const t = clock.getElapsedTime();
-
-  particles.rotation.y = t * 0.015;
-  particles.rotation.x = t * 0.008;
-
-  sphere.rotation.x = t * 0.12;
-  sphere.rotation.y = t * 0.08;
-
-  sphere2.rotation.x = -t * 0.07;
-  sphere2.rotation.z = t * 0.1;
-
-  camera.position.x += (mouseX * 2 - camera.position.x) * 0.02;
-  camera.position.y += (-mouseY * 2 - camera.position.y) * 0.02;
-  camera.lookAt(scene.position);
-
-  renderer.render(scene, camera);
-}
-animate();
-
-// ── Scroll reveal ──
+// Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
 revealEls.forEach(el => observer.observe(el));
 
-// ── Active nav highlight ──
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => {
-    if (window.scrollY >= s.offsetTop - 200) current = s.id;
+// Hero canvas: slow drifting gold particle field with connecting lines
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let w, h, particles;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function resize() {
+  w = canvas.width = canvas.offsetWidth * devicePixelRatio;
+  h = canvas.height = canvas.offsetHeight * devicePixelRatio;
+}
+function initParticles() {
+  const count = Math.min(60, Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 18000));
+  particles = Array.from({ length: count }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    vx: (Math.random() - 0.5) * 0.25 * devicePixelRatio,
+    vy: (Math.random() - 0.5) * 0.25 * devicePixelRatio,
+    r: (Math.random() * 1.4 + 0.6) * devicePixelRatio
+  }));
+}
+function step() {
+  ctx.clearRect(0, 0, w, h);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > w) p.vx *= -1;
+    if (p.y < 0 || p.y > h) p.vy *= -1;
   });
-  navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const a = particles[i], b = particles[j];
+      const dx = a.x - b.x, dy = a.y - b.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const maxDist = 160 * devicePixelRatio;
+      if (dist < maxDist) {
+        ctx.strokeStyle = `rgba(201,162,75,${0.14 * (1 - dist / maxDist)})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+  }
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(201,162,75,0.5)';
+    ctx.fill();
   });
-});
+  if (!reduceMotion) requestAnimationFrame(step);
+}
+window.addEventListener('resize', () => { resize(); initParticles(); });
+resize(); initParticles();
+if (!reduceMotion) requestAnimationFrame(step);
+else step();
 </script>
+
 </body>
 </html>
